@@ -4,6 +4,8 @@
 Created on Fri Nov 15 19:17:54 2019
 
 @author: Bo
+
+Show user what computer see
 """
 
 import face_recognition
@@ -21,7 +23,7 @@ from tkinter import *
 # Load image label and coding
 known_face_encodings = []
 known_face_names = []
-image_label_path = "D:/DeepLearning/Projects/FaceRecognitionMonitor/image_label/"
+image_label_path = "./image_label/"
 for i in os.listdir(image_label_path):
 	file_path = os.path.join(image_label_path,i)  # join path
 	image_read = face_recognition.load_image_file(file_path)
@@ -63,7 +65,7 @@ def sign_name(video_capture, frame, sign_path, name):
 	elif reply == "我不是" + name + "，退出":
 		speaker.say("好的")
 		speaker.runAndWait()
-		cv2.imshow('Video', "D:/DeepLearning/Projects/FaceRecognitionMonitor/default_show/White.jpg")
+		cv2.imshow('Video', "./default_show/White.jpg")
 		time.sleep(2)
 
 # add label to image
@@ -152,8 +154,8 @@ def face_sign(sign_type, video_capture):
 	date = datetime.date.today()
 
 	# Sign path
-	sign_in_path = "D:/DeepLearning/Projects/FaceRecognitionMonitor/sign/sign-in_" + str(date)
-	sign_off_path = "D:/DeepLearning/Projects/FaceRecognitionMonitor/sign/sign-off_" + str(date)
+	sign_in_path = "./sign/sign-in_" + str(date)
+	sign_off_path = "./sign/sign-off_" + str(date)
 	# Create path for sign pic storage
 	if not os.path.exists(sign_in_path):
 		os.mkdir(sign_in_path)
@@ -185,24 +187,3 @@ while True:
 # Release handle to the webcam
 video_capture.release()
 cv2.destroyAllWindows()
-
-
-
-# GUI choices
-# def gui_interface():
-# 	root = Tk()
-# 	root.title('考勤')
-# 	v = IntVar()
-# 	# photo = PhotoImage(file="bg.gif")    # 声明一下图片
-# 	group=LabelFrame(root,text='请选择上班打卡还是下班打卡')   # 基于root 制定一个框架 . 
-# 	group.pack(padx=50)
-# 	v.set(1)
-# 	Language = [('上班', 1),
-# 				('下班', 2),
-# 				('不是本人, 重新验证', 3)
-# 			]
-# 	for lang,num in Language:
-# 		b = Radiobutton(root,text=lang,variable=v,value=num,indicatoron=False,padx=30,pady=3)
-# 		l = Label(root,textvariable=v)
-# 		b.pack(anchor=W,fill=X)
-# 	mainloop()
